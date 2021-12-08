@@ -1,0 +1,7 @@
+name: Setup Gitea
+inputs:
+  gitea-version:
+    description: The Gitea version to download (if necessary) and use
+runs:
+  using: node12
+  main: index.ts

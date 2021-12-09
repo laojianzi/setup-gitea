@@ -15,3 +15,4 @@ jobs:
         gitea-version: ${{ matrix.gitea }}
         args: --version
     - run: gitea --version
+    - run: echo "OS_TMPDIR=${{ env.OS_TMPDIR }}"

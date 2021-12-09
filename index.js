@@ -8708,6 +8708,7 @@ const installGitea = (version) => __awaiter(void 0, void 0, void 0, function* ()
     core.info(`Installed gitea into ${toolPath} in ${Date.now() - startedAt}ms`);
     run(`chmod +x ${toolPath}`);
     core.addPath(path.dirname(toolPath));
+    core.exportVariable("OS_TMPDIR", path.dirname(toolPath));
     return toolPath;
 });
 function run(command) {

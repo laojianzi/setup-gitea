@@ -13,4 +13,5 @@ jobs:
     - uses: ./.
       with:
         gitea-version: ${{ matrix.gitea }}
+        args: --version
     - run: gitea --version

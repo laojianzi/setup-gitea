@@ -1,7 +1,13 @@
 name: Setup Gitea
 inputs:
   gitea-version:
-    description: The Gitea version to download (if necessary) and use
+    description: version of gitea to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
+    default: ""
+    required: false
+  args:
+    description: "gitea command line arguments"
+    default: ""
+    required: false
 runs:
   using: node12
   main: index.js

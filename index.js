@@ -8731,12 +8731,13 @@ const getLatestVersion = () => {
 };
 let installVersion = getLatestVersion();
 const inputVersion = core.getInput(`gitea-version`);
-if (inputVersion != "") {
+if (inputVersion != "" && inputVersion.toLowerCase() != "latest") {
     installVersion = inputVersion;
 }
+const args = core.getInput(`args`);
 installGitea(installVersion)
     .then((toolPath) => {
-    run(`${toolPath} --version`);
+    run(`${toolPath} ${args}`);
 })
     .catch((err) => {
     core.setFailed(`Error: ${err.message}`);

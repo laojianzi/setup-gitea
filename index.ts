@@ -7,6 +7,7 @@ import path = require("path")
 import process = require("process")
 
 const downloadURL = "https://dl.gitea.io/gitea"
+let exp = ""
 const getAssetURL = (version: string): string => {
   let platform = os.platform().toString()
   switch (platform) {
@@ -25,24 +26,35 @@ const getAssetURL = (version: string): string => {
       break
   }
 
-  return `${downloadURL}/${version}/gitea-${version}-${platform}-${arch}`
+  switch (platform) {
+    case "windows":
+      platform = "windows-4.0"
+      exp = ".exe"
+      break
+    case "darwin":
+      platform = "darwin-10.12"
+      break
+  }
+
+  return `${downloadURL}/${version}/gitea-${version}-${platform}-${arch}${exp}`
 }
 
-const installGitea = async (version: string) => {
+const installGitea = async (version: string): Promise<string> => {
   core.info(`Installing gitea ${version}...`)
 
   const startedAt = Date.now()
   const assetURL = getAssetURL(version)
   core.info(`Downloading ${assetURL} ...`)
 
-  const toolPath = await tc.downloadTool(assetURL)
+  const toolPath = await tc.downloadTool(assetURL, `${os.tmpdir()}/gitea${exp}`)
   core.info(`Installed gitea into ${toolPath} in ${Date.now() - startedAt}ms`)
-
+  run(`chmod +x ${toolPath}`)
   core.addPath(path.dirname(toolPath))
+  return toolPath
 }
 
 function run(command: string) {
-  console.log(command)
+  core.info(command)
   const env = Object.assign({}, process.env)
   delete env.CI // for Homebrew on macos-11.0
   execSync(command, { stdio: "inherit", env: env })
@@ -71,4 +83,9 @@ if (inputVersion != "") {
 }
 
 installGitea(installVersion)
-run(`gitea --version`)
+  .then((toolPath) => {
+    run(`${toolPath} --version`)
+  })
+  .catch((err) => {
+    core.setFailed(`Error: ${err.message}`)
+  })

@@ -1,0 +1,38 @@
+{
+  "name": "setup-gitea",
+  "version": "1.0.0",
+  "private": true,
+  "description": "setup gitea",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc index.ts",
+    "type-check": "tsc",
+    "lint": "eslint --max-warnings 1 *.ts --cache",
+    "lint-fix": "eslint *.ts --cache --fix",
+    "format": "prettier --write *.ts",
+    "format-check": "prettier --check *.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laojianzi/setup-gitea.git"
+  },
+  "author": "laojianzi",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@actions/tool-cache": "^1.7.1",
+    "@types/axios": "^0.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.3.5"
+  }
+}

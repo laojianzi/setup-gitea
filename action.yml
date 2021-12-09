@@ -4,4 +4,4 @@ inputs:
     description: The Gitea version to download (if necessary) and use
 runs:
   using: node12
-  main: index.ts
+  main: index.js

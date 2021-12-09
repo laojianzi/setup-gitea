@@ -3,6 +3,7 @@ import * as tc from "@actions/tool-cache"
 import os from "os"
 import path from "path"
 
+const process = require('process');
 const request = require('request');
 const execSync = require("child_process").execSync;
 const spawnSync = require('child_process').spawnSync;
@@ -79,6 +80,11 @@ const getLatestVersion = (): string => {
   return version
 }
 
-const defaultVersion = getLatestVersion()
-installGitea(defaultVersion)
+let installVersion = getLatestVersion()
+const inputVersion = core.getInput(`gitea-version`)
+if (inputVersion != '') {
+  installVersion = inputVersion
+}
+
+installGitea(installVersion)
 run(`gitea --version`)

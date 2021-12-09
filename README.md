@@ -1,10 +1,15 @@
 # setup-gitea
 
-## ENV Setting
+The missing action for Gitea
+
+- Works on Linux, Mac, and Windows
+- Supports different versions
+
+### ENV Setting
 
 ref: https://docs.gitea.io/en-us/environment-variables/
 
-## Action Input
+### Action Input
 
 ```yml
     steps:
@@ -15,11 +20,11 @@ ref: https://docs.gitea.io/en-us/environment-variables/
         args: --version
 ```
 
-### gitea-version
+#### gitea-version
 
 version of gitea to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
 
-### args
+#### args
 
 gitea command line arguments
 
